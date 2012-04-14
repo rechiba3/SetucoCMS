@@ -101,7 +101,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ->addStyleSheetModule('dijit.themes.soria');
 
         $doctypeHelper = new Zend_View_Helper_Doctype();
-        $doctypeHelper->doctype('XHTML1_STRICT');
+        $doctypeHelper->doctype('HTML5');
 
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->setView($view);

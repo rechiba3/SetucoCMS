@@ -32,20 +32,14 @@
  */
 ?>
 
-<div id="header_innerR"> 
+<header> 
     <div id="header_inner"> 
-
         <h1><a href="<?php echo $this->baseUrl('') ?>" tabindex="1"><?php echo $this->escape($this->siteInfos['name']) ?></a></h1>
-
-        <form action="<?php echo $this->baseUrl('/page/search/') ?>" method="get">
-            <dl>
-                <dt><label for="keyword">フリーワード検索</label></dt>
-                <dd><input type="text" name="query" id="keyword" value="<?php echo mb_strlen($this->keyword, 'UTF-8') > 0 ? $this->keyword : 'キーワードを入力して下さい' ?>" onfocus="if (this.value == 'キーワードを入力して下さい') { this.value=''; }" onblur="if(this.value == '') { this.value='キーワードを入力して下さい'; }" tabindex="2" /></dd>
-            </dl>
-            <p><input type="submit" value="検索" tabindex="3" /></p>
-        </form>
-
-        <p id="description"><?php echo $this->escape($this->siteInfos['comment']) ?></p>
-
-    </div> 
- </div> 
+        <p class="descript"><?php echo $this->escape($this->siteInfos['comment']) ?></p> 
+        <ul class="utility">
+            <!-- <li><a href="#"><img src="/images/front/setucocms/icn_rss.png" alt="RSS" /></a></li> -->
+            <li><a href="https://twitter.com/#!/SetucoCMS" target="_blank"><img src="/images/front/setucocms/icn_twitter.png" alt="ツイッター" /></a></li>
+            <li><a href="http://www.facebook.com/SetucoCMS" target="_blank"><img src="/images/front/setucocms/icn_facebook.png" alt="フェイスブック" /></a></li>
+        </ul>
+    </div>
+</header>

@@ -31,4 +31,36 @@
  * @author      suzuki-mar
  */
 ?>
-<p id='copyright'>Copyright &copy; <?php echo $this->siteInfos['start_year'] ?> <?php echo $this->escape($this->siteInfos['name']) ?> AllRight reserved.</p>
+
+ <footer>
+     
+     <!-- footer_inner START -->
+     <div class="footer_inner">
+
+         <?php if ($this->tagClouds !== false): //タグがなかったら表示しない?>
+         <!-- tagCloud START --> 
+         <div id="tagCloud"> 
+             <h3><img src="/images/front/setucocms/h_tagCloud.png" alt="タグ" /></h3>
+             <ul> 
+                 <?php foreach ($this->tagClouds as $tag): ?>
+                 <li class="level<?php echo $tag['level'] ?>">
+                     <a href="<?php echo $this->baseUrl("/page/tag/id/{$tag['id']}") ?>"><?php  echo $this->escape($tag['name']) ?></a>
+                 </li>
+                 <?php endforeach;?>
+             </ul> 
+         </div> 
+         <!-- tagCloud END -->
+	       <?php endif;?>
+         
+         <p class="backTop"><a href="#wrapper">ページの先頭に戻る</a></p>
+         
+     </div>
+     <!-- footer_inner END -->
+     
+     <!-- copyright_area START -->
+     <div class="copyright_area">
+         <p class='copyright'>Copyright &copy; <?php echo $this->siteInfos['start_year'] ?> <?php echo $this->escape($this->siteInfos['name']) ?> AllRight reserved.</p>
+     </div>
+     <!-- copyright_area END -->
+         
+ </footer>

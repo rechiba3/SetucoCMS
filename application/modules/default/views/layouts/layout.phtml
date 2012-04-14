@@ -42,13 +42,14 @@ if (empty($this->pageTitle)) {
 
 ?>
 <?php echo $this->doctype() . "\n" ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta http-equiv="content-style-type" content="text/css" />
+<html> 
+    <head> 
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <meta http-equiv="Content-Language" content="ja" />
+        <meta http-equiv="content-style-type" content="text/css" /> 
         <meta http-equiv="content-script-type" content="text/javascript" />
 
-        <meta name="author" content="" />
+        <meta name="author" content="ErinaMikami with SetuCMS Project" />
         <meta name="copyright" content="<?php echo $this->escape($this->siteInfos['name']) ?>" />
         <meta name="generator" content="SetucoCMS <?php echo APPLICATION_VERSION ?>" />
         <meta http-equiv="imagetoolbar" content="no" />
@@ -59,18 +60,41 @@ if (empty($this->pageTitle)) {
         <link rel="start" href="<?php echo $this->escape($this->siteInfos['url']) ?>" title="このサイトのトップページ" />
 
         <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('/css/style.css') ?>" media="screen" />
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 
         <?php echo $this->headTitle() . "\n" ?>
+
+        <!-- plusone+ START -->
+        <script type="text/javascript">
+          window.___gcfg = {lang: 'ja'};
+
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+        </script>
+        <!-- plusone+ END -->
     </head>
     <body>
+      <!-- Facebook Javascript SDK START -->
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+      <!-- Facebook Javascript SDK END -->
 
         <!-- wrapper START -->
         <div id="wrapper">
 
             <!-- header START -->
-            <div id="header_innerL">
-                <?php echo $this->render('header.phtml'); ?>
-            </div>
+            <?php echo $this->render('header.phtml'); ?>
             <!-- header END -->
 
             <!-- content START -->
@@ -91,10 +115,12 @@ if (empty($this->pageTitle)) {
             </div>
             <!-- content END -->
 
-            <?php echo $this->render('footer.phtml') ?>
-
         </div>
-        <!-- container END -->
+        <!-- wrapper END -->
+
+       <!-- footer START --> 
+       <?php echo $this->render('footer.phtml') ?>
+       <!-- footer END -->
 
     </body>
 </html>
