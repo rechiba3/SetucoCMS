@@ -27,7 +27,8 @@
  * @link
  * @version
  * @since       File available since Release 0.1.0
- * @param       array   $newPages     ページ一覧ページに表示させるページデータ       
+ * @param       entries ページ一覧ページに属するページのデータを収めた配列
+ * @param       category カテゴリのデータ
  * @author      suzuki-mar
  */
 ?>
@@ -47,7 +48,7 @@
                     <!-- ><dt class="author">ライター</dt>
                         <dd class="author"><a href="#">author</a></dd> -->
                     <dt class="category">カテゴリー</dt>
-                        <dd class="category"><a href="<?php echo $this->baseUrl('page/category/id/' . $this->category['id']) ?>" ><?php echo $this->escape($this->category['name']) ?></a></dd>
+                        <dd class="category"><a href="<?php echo $this->baseUrl('page/category/id/') . $this->category['id'] ?>"><?php echo $this->escape($this->category['name']) ?></a></dd>
                 </dl>
                 <!-- <dl class="entryComments">
                                 <dt class="comment">コメント数</dt>

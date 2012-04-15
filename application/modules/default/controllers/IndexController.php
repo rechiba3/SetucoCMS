@@ -56,6 +56,13 @@ class IndexController extends Setuco_Controller_Action_DefaultAbstract
     private $_pageService = null;
 
     /**
+     * categoryサービスクラスのインスタンス
+     *
+     * @var Default_Model_Category
+     */
+    private $_categoryService = null;
+
+    /**
      * アクションの共通設定
      *
      * @return void
@@ -67,6 +74,7 @@ class IndexController extends Setuco_Controller_Action_DefaultAbstract
         parent::init();
 
         $this->_pageService = new Default_Model_Page();
+        $this->_categoryService = new Default_Model_Category();
 
     }
 
@@ -86,6 +94,17 @@ class IndexController extends Setuco_Controller_Action_DefaultAbstract
             $entries[$cnt]['contents'] = mb_substr(strip_tags($entry['contents']), 0, 100, 'UTF-8');
             $date->set($entry['update_date'], Zend_Date::ISO_8601);
             $entries[$cnt]['update_date'] = $date->toString('Y/MM/dd HH:mm');
+
+            $categoryId = $entries[$cnt]['category_id'];
+            if (is_null($categoryId)) {
+                $category['id'] = Setuco_Data_Constant_Category::UNCATEGORIZED_VALUE;
+                $category['name'] = Setuco_Data_Constant_Category::UNCATEGORIZED_STRING;
+                $category['parent_id'] = Setuco_Data_Constant_Category::NO_PARENT_ID;
+            } else {
+                $category = $this->_categoryService->findCategory($categoryId);
+            }
+            $this->view->category = $category;
+            // var_dump($category['name']);
         }
         $this->view->entries = $entries;
         // 
@@ -104,49 +123,6 @@ class IndexController extends Setuco_Controller_Action_DefaultAbstract
         // $this->view->currentPage = $currentPage;
         // $this->setPagerForView($this->_pageService->countPagesByCategoryId($id, Setuco_Data_Constant_Page::STATUS_RELEASE), self::LIMIT_PAGE_CATEGORY);
     }
-
-   // public function categoryAction()
-   //    {
-   // 
-   //        $id = $this->_getParam('id');
-   // 
-   //        if ($id === Setuco_Data_Constant_Category::UNCATEGORIZED_VALUE || $id === '0') { // @todo 未分類カテゴリの指定方法確定
-   //            // id='uncategorized'は未分類扱いとする
-   //            $id = null;
-   //        } elseif (!is_numeric($id) && !is_null($id) || is_numeric($id) && $id < 0) {
-   //            // 不正なIDが指定されたら例外発生させる（暫定仕様）
-   //            throw new Zend_Exception("不正なカテゴリID");
-   //        } else {
-   //            // 正しいID（1以上の整数文字）が指定されたらintにしておく
-   //            $id = (int)$id;
-   //        }
-   // 
-   //        $currentPage = $this->_getPageNumber();
-   //        $entries = $this->_pageService->findPagesByCategoryId(
-   //            $id, Setuco_Data_Constant_Page::STATUS_RELEASE, $currentPage, self::LIMIT_PAGE_CATEGORY);
-   //        $date = new Zend_Date();
-   //        foreach ($entries as $cnt => $entry) {
-   //            $entries[$cnt]['contents'] = mb_substr(strip_tags($entry['contents']), 0, 100, 'UTF-8');
-   //            $date->set($entry['update_date'], Zend_Date::ISO_8601);
-   //            $entries[$cnt]['update_date'] = $date->toString('Y/MM/dd HH:mm');
-   //        }
-   //        $this->view->entries = $entries;
-   // 
-   //        if (is_null($id)) {
-   //            $category = Setuco_Data_Constant_Category::UNCATEGORIZED_INFO();
-   //        } else {
-   //            $category = $this->_categoryService->findCategory($id);
-   //        }
-   // 
-   //        $this->view->category = $category;
-   //        $this->_pageTitle = "「{$category['name']}」カテゴリーのページ";
-   // 
-   //        // ページネーター用の設定
-   //        $this->view->currentPage = $currentPage;
-   //        $this->setPagerForView($this->_pageService->countPagesByCategoryId($id, Setuco_Data_Constant_Page::STATUS_RELEASE), self::LIMIT_PAGE_CATEGORY);
-   // 
-   //    }
-
 }
 
 
